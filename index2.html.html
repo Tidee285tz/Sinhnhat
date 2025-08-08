@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <title>생일 축하 메시지</title>
+    <style>
+      :root {
+        --accent: #e67e22;
+      }
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #fceabb, #f8b500);
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        position: relative;
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+        max-width: 90%;
+        width: 650px;
+        text-align: center;
+      }
+      h1 {
+        color: #d35400;
+        margin-bottom: 16px;
+        font-size: clamp(1.2rem, 5vw, 1.6rem);
+      }
+      p {
+        font-size: clamp(0.95rem, 3.6vw, 1.05rem);
+        line-height: 1.7;
+        color: #333;
+        text-align: left;
+      }
+      .media {
+        margin-top: 14px;
+      }
+      .yt-placeholder {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+        background: #000;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .yt-placeholder img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.7);
+      }
+      .play-btn {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--accent);
+        border-radius: 999px;
+        padding: 14px 18px;
+        color: #fff;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+      }
+      audio {
+        width: 100%;
+        margin-top: 12px;
+        border-radius: 6px;
+      }
+      .note {
+        font-size: 13px;
+        color: #555;
+        margin-top: 10px;
+        text-align: left;
+      }
+      @media (max-width: 420px) {
+        p {
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎉 형부께 드리는 생일 축하 🎉</h1>
+      <p>
+        형부, 생일 진심으로 축하드립니다. 형부께서 즐겁고 행복한 생일을
+        보내시고, 건강과 기쁨이 늘 함께하시길 바랍니다. 언제나 가족과 저의 언니
+        곁에서 행복하게 지내시길 기원드립니다. 형부의 일도 항상 순조롭고
+        평안하시길 바랍니다. 올해는 형부 생일에 참석하지 못해 송구하지만,
+        내년에는 꼭 언니와 함께 형부 생일을 축하드리겠습니다.
+      </p>
+
+      <div class="media">
+        <!-- YouTube embed (recommended for Korean vocals) -->
+        <div id="ytPlaceholder" class="yt-placeholder">
+          <img
+            src="https://img.youtube.com/vi/p6EjUkQ3Ut0/hqdefault.jpg"
+            alt="YouTube thumbnail"
+          />
+          <button class="play-btn" id="playYT">▶ Phát bằng YouTube</button>
+        </div>
+
+        <!-- Fallback audio (direct MP3). Bạn có thể thay link này bằng file MP3 tự host -->
+        <audio
+          id="fallbackAudio"
+          controls
+          preload="none"
+          style="display: none; margin-top: 12px"
+        >
+          <source
+            src="https://cdn.pixabay.com/download/audio/2023/03/14/audio_63a21c8a2e.mp3?filename=happy-birthday-113058.mp3"
+            type="audio/mpeg"
+          />
+        </audio>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("playYT").addEventListener("click", function () {
+        const placeholder = document.getElementById("ytPlaceholder");
+        const iframe = document.createElement("iframe");
+        // video id: p6EjUkQ3Ut0 (SangSangPiano - Jazz ver.)
+        iframe.src =
+          "https://www.youtube.com/embed/p6EjUkQ3Ut0?rel=0&modestbranding=1&autoplay=1";
+        iframe.setAttribute("frameborder", "0");
+        iframe.setAttribute(
+          "allow",
+          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        );
+        iframe.setAttribute("allowfullscreen", "");
+        iframe.style.position = "absolute";
+        iframe.style.inset = 0;
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        // replace placeholder image with iframe player
+        placeholder.innerHTML = "";
+        placeholder.appendChild(iframe);
+        // show fallback audio control too (optional)
+        document.getElementById("fallbackAudio").style.display = "block";
+      });
+    </script>
+  </body>
+</html>
